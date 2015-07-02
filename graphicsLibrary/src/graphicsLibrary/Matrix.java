@@ -19,6 +19,10 @@ public class Matrix {
 	public double getEntry(int i, int j) {
 		return this.entries[i][j];
 	}
+	
+	public double[][] toArray() {
+		return this.entries;
+	}
 
 	/**
 	 * Returns the product of two matrices.
@@ -36,14 +40,14 @@ public class Matrix {
 		if (a.width != b.height) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
-		double[][] out = new double[b.width][a.height];
+		double[][] out = new double[a.height][b.width];
 		for (int i = 0; i < b.width; i++) {
 			for (int j = 0; j < a.height; j++) {
 				double set = 0;
 				for (int ii = 0; ii < b.height; ii++) {
 					set += a.getEntry(j, ii) * b.getEntry(ii, i);
 				}
-				out[i][j] = set;
+				out[j][i] = set;
 			}
 		}
 		return new Matrix(out);
