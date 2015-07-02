@@ -220,4 +220,58 @@ public class Matrix {
 		}
 		return new Matrix(out);
 	}
+	
+	/**
+	 * Returns a 2D rotation matrix of the given angle.
+	 * @param angle
+	 * 				-angle by which to rotate
+	 * @return
+	 */
+	public static Matrix rotationMatrix2D(double angle) {
+		double[][] in = new double[][]{{Math.cos(angle),-Math.sin(angle)},{Math.sin(angle),Math.cos(angle)}};
+		Matrix out = new Matrix(in);
+		return out;
+	}
+	
+	/**
+	 * Returns a 3D rotation matrix of the given angle, around the x-axis.
+	 * @param angle
+	 * 				-angle by which to rotate
+	 * @return
+	 */
+	public static Matrix rotationMatrix3DX(double angle) {
+		double[][] in = new double[][]{{1, 0, 			   0},
+									   {0, Math.cos(angle),-Math.sin(angle)},
+									   {0, Math.sin(angle),Math.cos(angle)}};
+		Matrix out = new Matrix(in);
+		return out;
+	}
+	
+	/**
+	 * Returns a 3D rotation matrix of the given angle, around the y-axis.
+	 * @param angle
+	 * 				-angle by which to rotate
+	 * @return
+	 */
+	public static Matrix rotationMatrix3DY(double angle) {
+		double[][] in = new double[][]{{Math.cos(angle), 0, -Math.sin(angle)},
+									   {0,				 1, 0},
+									   {Math.sin(angle), 0, Math.cos(angle)}};
+		Matrix out = new Matrix(in);
+		return out;
+	}
+	
+	/**
+	 * Returns a 3D rotation matrix of the given angle, around the z-axis.
+	 * @param angle
+	 * 				-angle by which to rotate
+	 * @return
+	 */
+	public static Matrix rotationMatrix3DZ(double angle) {
+		double[][] in = new double[][]{{Math.cos(angle),-Math.sin(angle), 0},
+									   {Math.sin(angle),Math.cos(angle),  0},
+									   {0,				0,   			  1}};
+		Matrix out = new Matrix(in);
+		return out;
+	}
 }
