@@ -52,6 +52,29 @@ public class Matrix {
 		}
 		return new Matrix(out);
 	}
+	
+	/**
+	 * Adds the two given Matrices together.
+	 * @param a
+	 * @param b
+	 * @return
+	 * A new matrix containing the sum of the two given.
+	 * @throws ArrayIndexOutOfBoundsException
+	 * -if the dimensions of the given Matrices are not equal.
+	 */
+	public static Matrix add(Matrix a, Matrix b) throws ArrayIndexOutOfBoundsException{
+		if(a.getHeight() != b.getHeight() || a.getWidth() != b.getWidth())
+			throw new ArrayIndexOutOfBoundsException();
+		double[][] aa = a.toArray();
+		double[][] bb = b.toArray();
+		double[][] out = new double[a.getHeight()][a.getWidth()];
+		for(int i = 0; i < a.getHeight(); i++) {
+			for(int j = 0; j < a.getWidth(); j++) {
+				out[i][j] = aa[i][j] + bb[i][j];
+			}
+		}
+		return new Matrix(out);
+	}
 
 	public String toString() {
 		String out = "[";
@@ -278,4 +301,5 @@ public class Matrix {
 		Matrix out = new Matrix(in);
 		return out;
 	}
+
 }

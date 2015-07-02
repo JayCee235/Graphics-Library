@@ -1,5 +1,6 @@
 package graphicsLibrary;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,13 +19,13 @@ public class Shape {
 	}
 	
 	public Color getColor(){
-		return this.color.clone();
+		return ColorUtil.clone(this.color);
 	}
 	
 	public void setColor(Color c){
-		this.color = c.clone();
+		this.color = ColorUtil.clone(c);
 		for(Triangle t : this.triangles){
-			t.setColor(c.clone());
+			t.setColor(ColorUtil.clone(c));
 		}
 	}
 	
@@ -376,8 +377,8 @@ public class Shape {
 			double lighting = (Vector.getAngle(c.getNormal(),
 					new Vector(c.getCenter(), light)))
 					/ (Math.PI);
-			Color holder = c.getColor().clone();
-			c.setColor(color.clone());
+			Color holder = ColorUtil.clone(c.getColor());
+			c.setColor(ColorUtil.clone(color));
 			c.shade(lighting, mode);
 			c.draw(Triangle.FILL_MODE);
 			c.setColor(holder);
@@ -386,39 +387,37 @@ public class Shape {
 	}
 	
 	public void drawShape(Point light, int mode){
-		GL11.glBegin(GL11.GL_TRIANGLES);
 		for (Triangle c : this.triangles) {
 			//Shader
 			double lighting = (Vector.getAngle(c.getNormal(),
 					new Vector(c.getCenter(), light)))
 					/ (Math.PI);
-			Color holder = c.getColor().clone();
+			Color holder = ColorUtil.clone(c.getColor());
 			c.shade(lighting, mode);
 			c.draw(Triangle.FILL_MODE);
 			c.setColor(holder);
 		}
-		GL11.glEnd();
 	}
 	
-	public void drawShape(Point[] lights, int mode){
-		GL11.glBegin(GL11.GL_TRIANGLES);
-		for (Triangle c : this.triangles) {
-			//Shader
-			double darkness = 1;
-			double lighting = 0;
-			for(int i = 0; i<lights.length; i++){
-				double check = (Vector.getAngle(c.getNormal(),
-				new Vector(c.getCenter(), lights[i]))) / (Math.PI);
-				darkness = 1-lighting;
-				lighting += check*darkness;
-			}
-			Color holder = c.getColor().clone();
-			c.shade(lighting, mode);
-			c.draw(Triangle.FILL_MODE);
-			c.setColor(holder);
-		}
-		GL11.glEnd();
-	}
+//	public void drawShape(Point[] lights, int mode){
+//		GL11.glBegin(GL11.GL_TRIANGLES);
+//		for (Triangle c : this.triangles) {
+//			//Shader
+//			double darkness = 1;
+//			double lighting = 0;
+//			for(int i = 0; i<lights.length; i++){
+//				double check = (Vector.getAngle(c.getNormal(),
+//				new Vector(c.getCenter(), lights[i]))) / (Math.PI);
+//				darkness = 1-lighting;
+//				lighting += check*darkness;
+//			}
+//			Color holder = c.getColor().clone();
+//			c.shade(lighting, mode);
+//			c.draw(Triangle.FILL_MODE);
+//			c.setColor(holder);
+//		}
+//		GL11.glEnd();
+//	}
 	
 	public void rotateAroundVector(double angle, Point p, Vector v){
 		for(Point c : this.points){

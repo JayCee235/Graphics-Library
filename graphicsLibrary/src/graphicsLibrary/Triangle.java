@@ -1,5 +1,7 @@
 package graphicsLibrary;
 
+import java.awt.Color;
+
 import org.lwjgl.opengl.GL11;
 
 public class Triangle {
@@ -29,7 +31,7 @@ public class Triangle {
 		this.a = a;
 		this.b = b;
 		this.c = c;
-		this.color = Color.newColorRGB(1, 1, 1);
+		this.color = Color.WHITE;
 		this.normal = Vector.cross(new Vector(a, c), new Vector(a, b))
 				.toUnitVector();
 
@@ -93,16 +95,12 @@ public class Triangle {
 	}
 
 	public void shade(double frac, int mode) {
-		this.color.shade(frac, mode);
+		this.color = ColorUtil.shade(this.color, frac, mode);
 	}
 
 	public Point getCenter() {
 		this.calculateCenter();
 		return this.center;
-	}
-
-	public void setColor(double red, double green, double blue) {
-		this.color.setColor(red, green, blue);
 	}
 
 	public void setColor(Color c) {
